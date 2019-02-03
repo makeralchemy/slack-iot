@@ -8,9 +8,9 @@ the credentials are stored in a file in the same directory as the
 The default name of the file is 'slack.credentials'.
 The default can be overriden by specifying 
 `credentials_file="anotherfile.credentials"`
-when instantiating an Iot object. 
+when instantiating slack IOT object. 
 
-It's recommended that the file type of .credentials is used to identify
+It's recommended that the file type of .credentials be used to identify
 files with credentials and that a line be added to .gitignore to prevent
 accidentially pushing the files to github repositories.
 
@@ -19,6 +19,6 @@ slack webhook credentials.  The format of the credentials is:
 
 XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX
 
-When an Iot object is instantiated, it will read in the first line,
+When a slack IOT object is instantiated, it will read in the first line,
 validate the length of the credentials, and verify the placement of 
 the two slashes before issuing the Post to slack.
