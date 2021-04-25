@@ -85,11 +85,14 @@ class Iot(object):
         # Send a message to the slack webhook and save the status and
         # reason codes.
         else:
-            response = requests.post(self.webhook,
-                                     json={"text": message},
-                                     )
-            self.status_code = response.status_code
-
+            try:
+                response = requests.post(self.webhook,
+                                         json={"text": message},
+                                         )
+                self.status_code = response.status_code
+            except requests.exceptions.RequestException as e:
+                print("Failed to send slack message:", e, file=sys.stderr)
+                self.status_code = 999
 
 #
 # This main function is used for testing this library.
@@ -99,7 +102,7 @@ if __name__ == "__main__":
     # Get the message from the command line.
     # Determine whether to send a message to Slack or print it.
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="send an IOT message to slack")
     parser.add_argument("message")
     parser.add_argument("-d",
                         "--debug",
